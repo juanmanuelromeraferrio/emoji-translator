@@ -1,9 +1,18 @@
 .emoji {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
+
+@media screen and (max-width: 767px) {
+    .emoji {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 .emoji p {
-    margin: 20px;
+    margin: 10px;
     font-size: 24px;
 }
 
@@ -15,7 +24,6 @@
     cursor: pointer;
     font-size: 14px;
     padding: 5px 10px;
-    margin-left: 20px;
     text-transform: uppercase;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;

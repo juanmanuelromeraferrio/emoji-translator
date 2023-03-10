@@ -28,7 +28,7 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>Emoji Translator</h1>
 
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.label} htmlFor="word">Enter a word:</label>
           <input
             id="word"
