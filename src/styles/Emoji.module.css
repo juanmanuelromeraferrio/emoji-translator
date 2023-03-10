@@ -1,0 +1,22 @@
+.emoji {
+    display: flex;
+    align-items: center;
+}
+.emoji p {
+    margin: 20px;
+    font-size: 24px;
+}
+
+.copyButton {
+    background: white;
+    border: solid 1px #f79d65;
+    border-radius: 5px;
+    color: #f79d65;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 10px;
+    margin-left: 20px;
+    text-transform: uppercase;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}

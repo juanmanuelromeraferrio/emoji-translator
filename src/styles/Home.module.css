@@ -1,0 +1,68 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  padding: 5rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main p {
+  margin: 20px;
+}
+
+.title {
+  margin: 0;
+  padding-bottom: 30px;
+  line-height: 1.15;
+  font-size: 20px;
+  text-align: center;
+}
+
+.title,
+.description {
+  line-height: 1.5;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.label {
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.input {
+  border: 1px solid #f79d65;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+}
+
+.button {
+  background: linear-gradient(180deg, #f7b267 0%, #f79d65 100%);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px 20px;
+  margin-left: 20px;
+  text-transform: uppercase;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
