@@ -10,6 +10,11 @@ const getEmoji = async (word) => {
             OR: [
                 {
                     word: {
+                        startsWith: word.toLowerCase().trim(),
+                    },
+                },
+                {
+                    word: {
                         startsWith: word.toLowerCase().trim() + " ",
                     },
                 },

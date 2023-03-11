@@ -7,13 +7,24 @@ export default function Home() {
   const [word, setWord] = useState('');
   const [emoji, setEmoji] = useState('');
   const [search, setSearch] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('/api/emoji?word=' + word);
-    const data = await response.json();
-    setEmoji(data.emoji);
-    setSearch(true);
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('/api/emoji?word=' + word);
+      const data = await response.json();
+      setEmoji(data.emoji);
+      setSearch(true);
+    } catch (error) {
+      setError('💩 Something went wrong. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
   };
 
 
@@ -40,7 +51,15 @@ export default function Home() {
           <button type="submit" className={styles.button}>Find Emoji</button>
         </form>
 
-        {emoji ? <Emoji emoji={emoji} /> : search && <p>😢 No emoji found.</p>}
+        {loading ? (
+          <p className={styles.loading}>🔄</p>
+        ) : (
+          error ? (
+            <p className={styles.error}>{error}</p>
+          ) : (
+            emoji ? <Emoji emoji={emoji} /> : search && <p>😢 No emoji found.</p>
+          )
+        )}
       </main>
     </div>
   );
