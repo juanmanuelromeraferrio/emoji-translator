@@ -9,9 +9,7 @@ const getEmoji = async (word) => {
         where: {
             OR: [
                 {
-                    word: {
-                        startsWith: word.toLowerCase().trim(),
-                    },
+                    word: word.toLowerCase().trim(),
                 },
                 {
                     word: {
