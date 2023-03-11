@@ -1,12 +1,34 @@
 const prisma = require('./prisma');
 
+
 const getEmoji = async (word) => {
-    const entry = await prisma.emoji.findUnique({
+    const results = await prisma.emoji.findMany({
+        select: {
+            emoji: true
+        },
         where: {
-            word: word.toLowerCase()
-        }
+            OR: [
+                {
+                    word: {
+                        startsWith: word.toLowerCase().trim() + " ",
+                    },
+                },
+                {
+                    word: {
+                        endsWith: " " + word.toLowerCase().trim(),
+                    },
+                },
+                {
+                    word: {
+                        contains: " " + word.toLowerCase().trim() + " ",
+                    },
+                },
+            ],
+        },
     });
-    return entry ? entry.emoji : null;
+    const emojis = results.map(entry => entry.emoji);
+    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+    return randomEmoji || null;
 };
 
 export default getEmoji;
