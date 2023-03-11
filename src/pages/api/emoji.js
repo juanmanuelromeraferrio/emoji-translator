@@ -1,4 +1,5 @@
 import getEmoji from "../../lib/getEmoji";
+import saveEmoji from "../../lib/saveEmoji";
 import getEmojiFromChatGPT from "../../lib/getEmojiFromChatGPT";
 
 
@@ -10,13 +11,7 @@ export default async (req, res) => {
     // If emoji is not found in Prisma, search in ChatGPT API
     emoji = await getEmojiFromChatGPT(word);
     if (emoji) {
-      await prisma.emoji.create({
-        data: {
-          word: word.toLowerCase(),
-          emoji,
-          source: "ChatGPT"
-        },
-      });
+      await saveEmoji(word, emoji, "ChatGPT");
     }
   }
 
