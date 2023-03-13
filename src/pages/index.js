@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Emoji from "../components/Emoji";
+import Footer from "../components/Footer";
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -40,7 +41,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Emoji Translator</h1>
+        <h1 className={styles.title}>✨ Emoji Translator ✨</h1>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <label className={styles.label} htmlFor="word">Enter a word:</label>
@@ -64,6 +65,7 @@ export default function Home() {
           )
         )}
       </main>
+      <Footer/>
     </div>
   );
 }

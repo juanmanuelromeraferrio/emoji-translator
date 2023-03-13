@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: #f8f9fa;
 }
 
 .main {
@@ -30,7 +31,7 @@
 .title,
 .description {
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 2.3rem;
   text-align: center;
 }
 
