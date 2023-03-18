@@ -1,4 +1,4 @@
-import { getEmoji } from './getEmoji';
+import { getEmoji } from '../src/lib/getEmoji';
 
 const mockFindMany = jest.fn();
 

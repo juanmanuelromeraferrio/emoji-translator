@@ -1,5 +1,5 @@
-const { Configuration, OpenAIApi } = require("openai");
-const { getEmojiFromChatGPT } = require('./getEmojiFromChatGPT');
+const { OpenAIApi } = require("openai");
+const { getEmojiFromChatGPT } = require('../src/lib/getEmojiFromChatGPT');
 
 jest.mock("openai");
 

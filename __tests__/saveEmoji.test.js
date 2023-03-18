@@ -1,4 +1,4 @@
-const { saveEmoji } = require('./saveEmoji');
+const { saveEmoji } = require('../src/lib/saveEmoji');
 
 const mockCreate = jest.fn();
 const mockPrisma = {

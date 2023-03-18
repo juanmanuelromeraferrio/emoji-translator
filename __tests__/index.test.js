@@ -1,6 +1,6 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Home from '../pages/index';
+import Home from '../src/pages/index';
 
 describe('Home page', () => {
   test('renders input and button', () => {
