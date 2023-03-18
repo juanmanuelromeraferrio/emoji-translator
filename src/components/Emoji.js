@@ -1,18 +1,23 @@
-import React from "react";
-import { useState, useEffect } from 'react';
-import styles from '../styles/Emoji.module.css';
+import React, { useState, useEffect } from "react";
+import styles from "../styles/Emoji.module.css";
 
 const Emoji = ({ emoji }) => {
     const [copied, setCopied] = useState(false);
 
-    function copyToClipboard() {
+    const copyToClipboard = () => {
         navigator.clipboard.writeText(emoji);
         setCopied(true);
-    }
+    };
 
     useEffect(() => {
-        setCopied(false);
-    }, [emoji]);
+        if (copied) {
+            const timer = setTimeout(() => {
+                setCopied(false);
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [emoji, copied]);
 
     return (
         <div className={styles.emoji}>

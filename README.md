@@ -1,38 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Emoji Translator
 
-## Getting Started
+Have you ever struggled to choose the perfect emoji to convey the right emotion or meaning? We've all been there. But fear not, because the Emoji Translator is here to help!
 
-First, run the development server:
+With the help of ChatGPT, the Emoji Translator can translate any word or words to a single emoji, making it easier than ever to express yourself with the perfect visual. Simply input your text, and the Emoji Translator will suggest an emoji based on the meaning and context of your words.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Whether you're trying to express love, happiness, sadness, or anything in between, the Emoji Translator has got you covered. So why not give it a try and take your emoji game to the next level?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img src="https://github.com/juanmanuelromeraferrio/emoji-translator/blob/main/images/image.jpeg" width="600" />
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Installation
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Clone the repository:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+    ```bash
+    git clone https://github.com/juanmanuelromeraferrio/emoji-translator.git
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Install the required packages:
 
-## Learn More
+    ```bash
+    cd emoji-translator
+    npm install
+    ```
+3. Input your DATABASE_URL in the .env file, you can use [Superbase](https://supabase.com/)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    OPENAI_API_KEY=$YOUR_API_KEY
+    ```
+    
+4. Input your OPENAI API key in the .env file, you can get your API key [here](https://beta.openai.com/account/api-keys):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+    ```bash
+    OPENAI_API_KEY=$YOUR_API_KEY
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Start the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```bash
+    npm run dev
+    ```
+
+## License
+
+SQL Translator is released under the MIT License.
