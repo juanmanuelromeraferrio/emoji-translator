@@ -26,7 +26,7 @@ Whether you're trying to express love, happiness, sadness, or anything in betwee
 
 
     ```bash
-    OPENAI_API_KEY=$YOUR_API_KEY
+    DATABASE_URL=$DATABASE_URL
     ```
     
 4. Input your OPENAI API key in the .env file, you can get your API key [here](https://beta.openai.com/account/api-keys):
