@@ -3,7 +3,7 @@ import styles from "../styles/EmojiCounter.module.css";
 
 
 const EmojiCounter = () => {
-  const [emojiCount, setEmojiCount] = useState(null);
+  const [emojiCount, setEmojiCount] = useState(0);
 
   useEffect(() => {
     fetch('/api/emojis/count')
@@ -17,9 +17,7 @@ const EmojiCounter = () => {
   }, []);
 
   return (
-    emojiCount && (
       <p className={styles.subtitle}>{emojiCount} translations generated and counting!</p>
-    )
   );
 }
 
