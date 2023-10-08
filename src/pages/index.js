@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 import Head from 'next/head';
 import Emoji from "../components/Emoji";
 import Footer from "../components/Footer";
+import EmojiCounter from "../components/EmojiCounter";
+
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -78,18 +81,21 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>✨ Emoji Translator ✨</h1>
-
+        <h1 className={styles.title}>Emoji Translator</h1>
+        <EmojiCounter/>
+        
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label className={styles.label} htmlFor="word">Enter a word:</label>
           <input
             id="word"
             type="text"
+            placeholder="messi"
             className={styles.input}
             value={word}
             onChange={(event) => setWord(event.target.value)}
           />
-          <button type="submit" className={styles.button}>Find Emoji</button>
+          <button type="submit" className={styles.button}>
+            <FaSearch />
+          </button>
         </form>
 
         {loading ? (

@@ -20,9 +20,9 @@
 
 .actionButton {
     background: white;
-    border: solid 1px #f79d65;
+    border: solid 1px #000;
     border-radius: 5px;
-    color: #f79d65;
+    color: #000;
     cursor: pointer;
     font-size: 14px;
     padding: 5px 10px;

@@ -1,5 +1,5 @@
 .footer {
-    border-top: solid #e5e7eb;
+    border-top: solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,7 +13,7 @@
 }
 
 .footerContainer p {
-    color: #64748b;
+    color: #000;
 }
 
 .footerLinks {
@@ -30,11 +30,11 @@
     margin: 5px;
     width: 24px;
     height: 24px;
-    fill: #64748b;
+    fill: #000;
 }
 
 .footer a svg:hover {
-    fill: #334155;
+    transform: translateY(-2px);
 }
 
 .footer a {
