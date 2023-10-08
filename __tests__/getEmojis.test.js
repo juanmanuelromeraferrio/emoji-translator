@@ -1,4 +1,4 @@
-import { getEmoji } from '../src/lib/getEmoji';
+import { getEmojis } from '../src/lib/getEmojis';
 
 const mockFindMany = jest.fn();
 
@@ -8,7 +8,7 @@ const mockPrisma = {
     },
 };
 
-describe('getEmoji', () => {
+describe('getEmojis', () => {
     afterEach(() => {
         jest.clearAllMocks();
     });
@@ -22,18 +22,18 @@ describe('getEmoji', () => {
 
         mockFindMany.mockResolvedValue(mockEmojis);
 
-        const emoji = await getEmoji(word, mockPrisma);
+        const emojis = await getEmojis(word, mockPrisma);
         expect(mockFindMany).toHaveBeenCalled();
-        expect(mockEmojis.some((entry) => entry.emoji === emoji)).toBeTruthy();
+        expect(emojis).toEqual(mockEmojis.map(entry => entry.emoji));
     });
 
     test('returns null if no matching emoji is found', async () => {
         const word = 'nonexistentword';
         mockFindMany.mockResolvedValue([]);
 
-        const emoji = await getEmoji(word, mockPrisma);
+        const emojis = await getEmojis(word, mockPrisma);
         expect(mockFindMany).toHaveBeenCalled();
-        expect(emoji).toBeNull();
+        expect(emojis).toHaveLength(0);
     });
 
     test('returns null if there is an error retrieving the emoji', async () => {
@@ -43,8 +43,8 @@ describe('getEmoji', () => {
                 findMany: jest.fn(() => { throw new Error('Oops!'); }),
             },
         };
-        const emoji = await getEmoji(word, mockPrisma);
+        const emojis = await getEmojis(word, mockPrisma);
         expect(mockPrisma.emoji.findMany).toHaveBeenCalled();
-        expect(emoji).toBeNull();
+        expect(emojis).toBeNull();
     });
 });

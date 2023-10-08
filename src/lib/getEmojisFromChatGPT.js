@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export const getEmojiFromChatGPT = async (word) => {
+export const getEmojisFromChatGPT = async (word) => {
     if (typeof word !== 'string' || !word.trim()) {
         throw new Error('Invalid word');
     }
@@ -13,19 +13,19 @@ export const getEmojiFromChatGPT = async (word) => {
     try {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: `Can you give an emoji for the word "${word}"?`,
+            prompt: `Can you give 10 emoji for the word "${word}, separated by comma"?`,
             temperature: 0.8,
             max_tokens: 60,
             top_p: 1.0,
             frequency_penalty: 0.0,
             presence_penalty: 0.0,
         });
-        const emoji = response.data.choices[0].text.trim();
-        return emoji;
+        const emojis = response.data.choices[0].text.trim().split(',');
+        return emojis;
     } catch (error) {
-        console.error('Error retrieving emoji:', error.message);
+        console.error('Error retrieving emojis:', error.message);
         return null;
     }
 };
 
-export default getEmojiFromChatGPT;
+export default getEmojisFromChatGPT;

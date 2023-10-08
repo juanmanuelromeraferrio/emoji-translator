@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const prisma = require('./prisma');
 
 export const saveEmoji = async (word, emoji, source, prismaInstance = prisma) => {
@@ -9,7 +11,7 @@ export const saveEmoji = async (word, emoji, source, prismaInstance = prisma) =>
     try {
         await prismaInstance.emoji.create({
             data: {
-                word: word.toLowerCase().trim(),
+                word: word.toLowerCase().trim() + "_" + uuidv4(),
                 emoji,
                 source: source.trim(),
             },

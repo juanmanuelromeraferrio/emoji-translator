@@ -13,7 +13,7 @@ describe('Home page', () => {
 
   test('displays loading spinner while fetching', async () => {
     const mockFetchPromise = Promise.resolve({
-      json: () => Promise.resolve({ emoji: '👍' }),
+      json: () => Promise.resolve({ emojis: ['👍'] }),
     });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
@@ -32,7 +32,7 @@ describe('Home page', () => {
 
   test('displays the emoji when a word is found', async () => {
     const mockFetchPromise = Promise.resolve({
-      json: () => Promise.resolve({ emoji: '👍' }),
+      json: () => Promise.resolve({ emojis: ['👍'] }),
     });
     global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 

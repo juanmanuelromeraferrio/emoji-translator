@@ -1,6 +1,6 @@
 const prisma = require('./prisma');
 
-export const getEmoji = async (word, prismaInstance = prisma) => {
+export const getEmojis = async (word, prismaInstance = prisma) => {
     try {
         const results = await prismaInstance.emoji.findMany({
             select: {
@@ -18,6 +18,11 @@ export const getEmoji = async (word, prismaInstance = prisma) => {
                     },
                     {
                         word: {
+                            startsWith: word.toLowerCase().trim() + '_',
+                        },
+                    },
+                    {
+                        word: {
                             endsWith: ' ' + word.toLowerCase().trim(),
                         },
                     },
@@ -30,12 +35,11 @@ export const getEmoji = async (word, prismaInstance = prisma) => {
             },
         });
         const emojis = results.map(({ emoji }) => emoji);
-        const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-        return randomEmoji || null;
+        return emojis || null;
     } catch (error) {
         console.error('Error retrieving emoji:', error);
         return null;
     }
 };
 
-export default getEmoji;
+export default getEmojis;

@@ -4,13 +4,13 @@ import '@testing-library/jest-dom';
 import Emoji from "../src/components/Emoji";
 
 describe("Emoji", () => {
-    const testEmoji = "😀";
+    const testEmojis = ["🔨","🤔"];
 
     test("renders emoji and copy button", () => {
-        render(<Emoji emoji={testEmoji} />);
+        render(<Emoji emojis={testEmojis} />);
 
-        expect(screen.getByText(testEmoji)).toBeInTheDocument();
-        expect(screen.getByRole("button", { name: /copy to clipboard/i })).toBeInTheDocument();
+        expect(screen.getByText(testEmojis[0])).toBeInTheDocument();
+        expect(screen.queryByTestId("copy-icon")).toBeInTheDocument()
     });
 
     test("copies emoji to clipboard and updates button text", async () => {
@@ -27,15 +27,16 @@ describe("Emoji", () => {
 
         const clipboardWriteTextMock = jest.spyOn(navigator.clipboard, "writeText").mockImplementation(() => { });
 
-        render(<Emoji emoji={testEmoji} />);
+        render(<Emoji emojis={testEmojis} />);
         const copyButton = screen.getByRole("button", { name: /copy to clipboard/i });
 
         fireEvent.click(copyButton); // Use fireEvent instead of userEvent
 
-        expect(clipboardWriteTextMock).toHaveBeenCalledWith(testEmoji);
-        expect(copyButton).toHaveTextContent(/copied!/i);
+        expect(clipboardWriteTextMock).toHaveBeenCalledWith(testEmojis[0]);
+        expect(screen.queryByTestId("check-icon")).toBeInTheDocument();
 
-        await waitFor(() => expect(copyButton).toHaveTextContent(/copy to clipboard/i), { timeout: 2100 });
+        await waitFor(() => expect(screen.queryByTestId("copy-icon")).toBeInTheDocument(), { timeout: 2100 });
+
 
         clipboardWriteTextMock.mockRestore();
     });

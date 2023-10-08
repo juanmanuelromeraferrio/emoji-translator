@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 const { saveEmoji } = require('../src/lib/saveEmoji');
 
 const mockCreate = jest.fn();
@@ -7,6 +8,10 @@ const mockPrisma = {
     },
 };
 const mockConsoleError = jest.fn();
+
+jest.mock('uuid', () => ({
+    v4: jest.fn(() => 'fixed-uuid-value'),
+}));
 
 describe('saveEmoji function', () => {
     beforeEach(() => {
@@ -24,7 +29,7 @@ describe('saveEmoji function', () => {
         expect(mockCreate).toHaveBeenCalledTimes(1);
         expect(mockCreate).toHaveBeenCalledWith({
             data: {
-                word: 'hello',
+                word: 'hello_fixed-uuid-value',
                 emoji: '😀',
                 source: 'test',
             },
@@ -37,7 +42,7 @@ describe('saveEmoji function', () => {
         expect(mockCreate).toHaveBeenCalledTimes(1);
         expect(mockCreate).toHaveBeenCalledWith({
             data: {
-                word: 'hello',
+                word: 'hello_fixed-uuid-value',
                 emoji: '😀',
                 source: 'test',
             },

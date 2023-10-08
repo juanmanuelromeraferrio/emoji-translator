@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [word, setWord] = useState('');
-  const [emoji, setEmoji] = useState('');
+  const [emojis, setEmojis] = useState([]);
   const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -17,9 +17,9 @@ export default function Home() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/emoji?word=' + word);
+      const response = await fetch('/api/emojis?word=' + word);
       const data = await response.json();
-      setEmoji(data.emoji);
+      setEmojis(data.emojis);
       setSearch(true);
     } catch (error) {
       setError('💩 Something went wrong. Please try again later.');
@@ -98,7 +98,7 @@ export default function Home() {
           error ? (
             <p className={styles.error}>{error}</p>
           ) : (
-            emoji ? <Emoji emoji={emoji} /> : search && <p>😢 No emoji found.</p>
+            (emojis && emojis.length > 0) ? <Emoji emojis={emojis} /> : search && <p>😢 No emoji found.</p>
           )
         )}
       </main>

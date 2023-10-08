@@ -1,22 +1,24 @@
 .emoji {
     display: flex;
+    flex-direction: row; 
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap; 
 }
 
-@media screen and (max-width: 767px) {
-    .emoji {
-        flex-direction: column;
-        align-items: center;
-    }
+.emoji > p {
+    margin-right: 10px;
+}
+
+.emoji > button {
+    margin: 5px;
 }
 
 .emoji p {
-    margin: 10px;
     font-size: 24px;
 }
 
-.copyButton {
+.actionButton {
     background: white;
     border: solid 1px #f79d65;
     border-radius: 5px;
@@ -27,4 +29,9 @@
     text-transform: uppercase;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+}
+
+.actionButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
