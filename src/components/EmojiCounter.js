@@ -1,24 +1,26 @@
-import { useState, useEffect } from 'react';
 import styles from "../styles/EmojiCounter.module.css";
+import useSWR from 'swr';
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const EmojiCounter = () => {
-  const [emojiCount, setEmojiCount] = useState(0);
+  const { data, error } = useSWR('/api/emojis/count', fetcher);
 
-  useEffect(() => {
-    fetch('/api/emojis/count')
-      .then(response => response.json())
-      .then(data => {
-        setEmojiCount(data.count);
-      })
-      .catch(error => {
-        console.error("Error fetching emoji count:", error);
-      });
-  }, []);
+  let content;
+  if (error) {
+    content = "Error loading data.";
+  } else if (!data) {
+    content = "Loading...";
+  } else {
+    content = `${data.count} translations generated and counting!`;
+  }
 
   return (
-      <p className={styles.subtitle}>{emojiCount} translations generated and counting!</p>
+    <p className={styles.subtitle}>
+      {content}
+    </p>
   );
-}
+};
 
 export default EmojiCounter;
+
