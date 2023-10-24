@@ -10,6 +10,19 @@
     margin: 10px;
     padding: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-width: 0px;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .emojiCard {
+        width: 40%;
+    }
+}
+
+.copy {
+    color: #fff;
+    background-color: #000;
 }
 
 .emojiCard:hover {

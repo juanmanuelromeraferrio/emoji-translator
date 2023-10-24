@@ -3,7 +3,14 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 70%;
-    padding-top: 4rem;
+    padding-top: 3rem;
+}
+
+@media (max-width: 767px) {
+    .emojiGrid {
+        width: 100%;
+        padding-top: 1rem;
+    }
 }
 
 .grid {
