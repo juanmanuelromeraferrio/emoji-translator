@@ -22,7 +22,8 @@ export default function Home() {
   };
 
   const addTranslations = (translations) => {
-    setRecenTranslations(translations)
+    if (translations)
+      setRecenTranslations(translations)
   }
 
   const handleSubmit = async (event) => {
