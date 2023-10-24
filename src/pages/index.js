@@ -1,29 +1,51 @@
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import useSWR from 'swr';
 import Head from 'next/head';
 import Emoji from "../components/Emoji";
 import Footer from "../components/Footer";
 import EmojiCounter from "../components/EmojiCounter";
-import useDebounce from '../hooks/useDebounce';
+import EmojiGrid from "../components/EmojiGrid";
 
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
   const [word, setWord] = useState('');
-  const debouncedWord = useDebounce(word, 500);
+  const [emojis, setEmojis] = useState([]);
+  const [recentTranslations, setRecenTranslations] = useState([]);
+  const [search, setSearch] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const fetcher = (...args) => fetch(...args).then(res => res.json());
-  const { data, error } = useSWR(debouncedWord ? `/api/emojis?word=${debouncedWord}` : null, fetcher);
 
-  const emojis = data?.emojis || [];
-  const isLoading = !error && !data && word;
-  const isSearch = Boolean(word);
+  const addTranslation = (emoji, word) => {
+    setRecenTranslations(prevEmojis => [{ emoji, word }, ...prevEmojis]);
+  };
+
+  const addTranslations = (translations) => {
+    setRecenTranslations(translations)
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  };
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch('/api/emojis?word=' + word);
+      const data = await response.json();
 
+      setEmojis(data.emojis);
+      setSearch(true);
+      if (data.emojis && data.emojis.length > 0) {
+        addTranslation(data.emojis[0], word);
+      }
+
+    } catch (error) {
+      setError('💩 Something went wrong. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   return (
     <div className={styles.container}>
       <Head>
@@ -89,15 +111,16 @@ export default function Home() {
           </button>
         </form>
 
-        {isLoading ? (
+        {loading ? (
           <p className={styles.loading}>🔄</p>
         ) : (
           error ? (
             <p className={styles.error}>{error}</p>
           ) : (
-            (emojis && emojis.length > 0) ? <Emoji emojis={emojis} /> : isSearch && <p>😢 No emoji found.</p>
+            (emojis && emojis.length > 0) ? <Emoji emojis={emojis} /> : search && <p>😢 No emoji found.</p>
           )
         )}
+        <EmojiGrid emojis={recentTranslations} addEmojis={addTranslations} />
       </main>
       <Footer />
     </div>

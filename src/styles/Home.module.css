@@ -9,11 +9,12 @@
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
+  padding-top: 10rem;
+  padding-bottom: 4rem;
+  flex: initial;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   width: 65%;
 }
 
@@ -40,6 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 95%;
 }
 
 @media screen and (max-width: 767px) {

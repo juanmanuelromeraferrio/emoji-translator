@@ -1,6 +1,7 @@
 import getEmojis from "../../lib/getEmojis";
 import saveEmoji from "../../lib/saveEmoji";
 import getEmojisFromChatGPT from "../../lib/getEmojisFromChatGPT";
+import saveRecentTranslation from "@/lib/saveRecentTranslation";
 
 
 export default async (req, res) => {
@@ -15,6 +16,10 @@ export default async (req, res) => {
         await saveEmoji(word, emoji, "ChatGPT");
       }
     }
+  }
+
+  if (emojis) {
+    await saveRecentTranslation(word, emojis[0]);
   }
 
   if (emojis) {

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,7 +8,14 @@ datasource db {
 }
 
 model Emoji {
-  word      String @id
-  emoji     String
-  source    String
+  word   String @id
+  emoji  String
+  source String
+}
+
+model RecentTranslation {
+  id         String   @id(map: "Recents_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  word       String?
+  emoji      String?
+  created_at DateTime @default(now()) @db.Timestamptz(6)
 }
