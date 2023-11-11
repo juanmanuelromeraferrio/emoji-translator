@@ -10,7 +10,12 @@ export const getRecentEmojis = async (prismaInstance = prisma) => {
             select: {
                 word: true,
                 emoji: true
+            },
+            cacheStrategy: {
+                swr: 86_400, // 1 day
+                ttl: 7_200, // 2 hours
             }
+            ,
         });
         return translations;
     } catch (error) {
