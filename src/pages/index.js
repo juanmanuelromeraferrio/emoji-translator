@@ -30,6 +30,13 @@ export default function Home() {
     event.preventDefault();
     setLoading(true);
     setError(null);
+
+    if (!word.trim()) {
+      setError('🤦‍♂️ Please enter a value before submitting!');
+      setLoading(false);
+      return;
+    }
+    
     try {
       const response = await fetch('/api/emojis?word=' + word);
       const data = await response.json();
