@@ -9,8 +9,8 @@
 }
 
 .main {
-  padding-top: 10rem;
-  padding-bottom: 4rem;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
   flex: initial;
   display: flex;
   flex-direction: column;
