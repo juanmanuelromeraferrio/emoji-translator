@@ -1,7 +1,6 @@
 .emojiGrid {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     width: 70%;
     padding-top: 3rem;
 }
