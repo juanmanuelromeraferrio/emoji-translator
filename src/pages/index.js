@@ -102,8 +102,9 @@ export default function Home() {
         <meta name="twitter:description" content="Translate words to an emoji in seconds." />
         <script async src="https://cdn.seline.so/seline.js"></script>
       </Head>
-      <Script src="https://cdn.seline.so/seline.js"/>
       
+      <Script async src="https://cdn.seline.so/seline.js" data-token="1d28d3682fb774d"/>
+
       <main className={styles.main}>
         <h1 className={styles.title}>Emoji Translator</h1>
         <EmojiCounter/>
