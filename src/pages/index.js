@@ -5,6 +5,7 @@ import Emoji from "../components/Emoji";
 import Footer from "../components/Footer";
 import EmojiCounter from "../components/EmojiCounter";
 import EmojiGrid from "../components/EmojiGrid";
+import Script from 'next/script'
 
 import styles from '../styles/Home.module.css';
 
@@ -99,8 +100,10 @@ export default function Home() {
         <meta property="og:title" content="Emoji Translator" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:description" content="Translate words to an emoji in seconds." />
+        <script async src="https://cdn.seline.so/seline.js"></script>
       </Head>
-
+      <Script src="https://cdn.seline.so/seline.js"/>
+      
       <main className={styles.main}>
         <h1 className={styles.title}>Emoji Translator</h1>
         <EmojiCounter/>
