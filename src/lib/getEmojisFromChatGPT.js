@@ -12,19 +12,29 @@ export const getEmojisFromChatGPT = async (word) => {
     try {
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            messages: [{ role: 'user', content: `Can you give 10 emoji for the word "${word}, separated by comma"?` }],
+            messages: [{
+                role: 'user',
+                content: `Provide exactly 10 emojis for the word "${word}" as a comma-separated list, with no numbering or additional text.`
+            }],
             temperature: 0.8,
             max_tokens: 60,
             top_p: 1.0,
             frequency_penalty: 0.0,
             presence_penalty: 0.0,
         });
-        const emojis = response.choices[0].message.content.trim().split(',');
+        
+        const rawEmojis = response.choices[0].message.content.trim();
+        const emojis = rawEmojis.split(',')
+            .map(e => e.replace(/^\d+\.\s*/, '').trim())
+            .filter(e => e.length > 0);
+        
+        console.log('Emojis:', emojis);
         return emojis;
     } catch (error) {
         console.error('Error retrieving emojis:', error.message);
         return null;
     }
 };
+
 
 export default getEmojisFromChatGPT;

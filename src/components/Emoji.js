@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCopy, FaCheck, FaRedo } from 'react-icons/fa';
 import styles from "../styles/Emoji.module.css";
+import { motion } from 'framer-motion';
 
 const Emoji = ({ emojis }) => {
     const [copied, setCopied] = useState(false);
@@ -28,12 +29,20 @@ const Emoji = ({ emojis }) => {
 
     return (
         <div className={styles.emoji}>
-            <p>{emojis[currentIndex]}</p>
+            <motion.p
+                key={emojis[currentIndex]}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+            >
+                {emojis[currentIndex]}
+            </motion.p>
             <button className={styles.actionButton} onClick={copyToClipboard} aria-label="Copy to Clipboard">
                 {copied ? <FaCheck data-testid="check-icon" /> : <FaCopy data-testid="copy-icon" />}
             </button>
             <button className={styles.actionButton} onClick={retryAction} aria-label="Retry">
-                <FaRedo/>
+                <FaRedo />
             </button>
         </div>
     );

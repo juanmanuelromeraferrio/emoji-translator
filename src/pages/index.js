@@ -58,7 +58,22 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Emoji Translator</title>
+        <title>Emoji Translator - Find the Perfect Emoji for Any Word</title>
+        <meta name="description" content="Translate words to emojis instantly. Find the perfect emoji for any word or phrase with our AI-powered emoji translator." />
+        <meta name="keywords" content="emoji, translator, emoji translator, emojis, word to emoji" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://your-emoji-translator.com/" />
+        <meta property="og:title" content="Emoji Translator - Find the Perfect Emoji" />
+        <meta property="og:description" content="Translate words to emojis instantly with our AI-powered emoji translator." />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://your-emoji-translator.com/" />
+        <meta name="twitter:title" content="Emoji Translator - Find the Perfect Emoji" />
+        <meta name="twitter:description" content="Translate words to emojis instantly with our AI-powered emoji translator." />
+  
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
         <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
@@ -98,8 +113,6 @@ export default function Home() {
         <meta property="og:site_name" content="Emoji Translator" />
         <meta property="og:description" content="Translate words to an emoji in seconds." />
         <meta property="og:title" content="Emoji Translator" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content="Translate words to an emoji in seconds." />
         <script async src="https://cdn.seline.so/seline.js"></script>
       </Head>
       

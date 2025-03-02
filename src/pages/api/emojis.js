@@ -6,6 +6,7 @@ import saveRecentTranslation from "@/lib/saveRecentTranslation";
 
 export default async (req, res) => {
   const { word } = req.query;
+    
   let emojis = await getEmojis(word);
 
   if (emojis && emojis.length < 10) {
