@@ -48,4 +48,6 @@ const EmojiGrid = forwardRef((_props, ref) => {
   );
 });
 
+EmojiGrid.displayName = 'EmojiGrid';
+
 export default EmojiGrid;
