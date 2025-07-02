@@ -11,8 +11,8 @@
     "test": "jest --watch"
   },
   "dependencies": {
-    "@prisma/client": "^5.5.2",
-    "@prisma/extension-accelerate": "^0.6.2",
+    "@prisma/client": "^6.11.0",
+    "@prisma/extension-accelerate": "^2.0.1",
     "@vercel/analytics": "^1.1.1",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
@@ -25,7 +25,6 @@
     "openai": "^4.26.0",
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
-    "prisma": "^5.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
