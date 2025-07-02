@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import Head from 'next/head';
 import Emoji from "../components/Emoji";
@@ -12,47 +12,58 @@ import styles from '../styles/Home.module.css';
 export default function Home() {
   const [word, setWord] = useState('');
   const [emojis, setEmojis] = useState([]);
-  const [recentTranslations, setRecenTranslations] = useState([]);
   const [search, setSearch] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  
+  const abortControllerRef = useRef(null);
+  const emojiGridRef = useRef(null);
 
-
-  const addTranslation = (emoji, word) => {
-    setRecenTranslations(prevEmojis => [{ emoji, word }, ...prevEmojis]);
-  };
-
-  const addTranslations = (translations) => {
-    if (translations)
-      setRecenTranslations(translations)
-  }
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    if (!word.trim()) {
-      setError('🤦‍♂️ Please enter a value before submitting!');
-      setLoading(false);
+  const searchEmojis = useCallback(async (searchTerm, isManualSubmit = false) => {
+    if (!searchTerm.trim()) {
+      if (isManualSubmit) {
+        setError('🤦‍♂️ Please enter a value before submitting!');
+      }
       return;
     }
+
+    // Cancel previous request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    
+    abortControllerRef.current = new AbortController();
+    
+    setLoading(true);
+    setError(null);
     
     try {
-      const response = await fetch('/api/emojis?word=' + word);
+      const response = await fetch('/api/emojis?word=' + searchTerm, {
+        signal: abortControllerRef.current.signal
+      });
       const data = await response.json();
 
-      setEmojis(data.emojis);
+      setEmojis(data.emojis || []);
       setSearch(true);
-      if (data.emojis && data.emojis.length > 0) {
-        addTranslation(data.emojis[0], word);
+      if (data.emojis && data.emojis.length > 0 && emojiGridRef.current) {
+        emojiGridRef.current.addTranslation(data.emojis[0], searchTerm);
       }
 
     } catch (error) {
-      setError('💩 Something went wrong. Please try again later.');
+      if (error.name !== 'AbortError') {
+        setError('💩 Something went wrong. Please try again later.');
+      }
     } finally {
       setLoading(false);
     }
+  }, []);
+
+
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await searchEmojis(word, true);
   };
   
   return (
@@ -129,7 +140,9 @@ export default function Home() {
             placeholder="messi"
             className={styles.input}
             value={word}
-            onChange={(event) => setWord(event.target.value)}
+            onChange={(event) => {
+              setWord(event.target.value);
+            }}
           />
           <button type="submit" className={styles.button}>
             <FaSearch />
@@ -142,10 +155,10 @@ export default function Home() {
           error ? (
             <p className={styles.error}>{error}</p>
           ) : (
-            (emojis && emojis.length > 0) ? <Emoji emojis={emojis} /> : search && <p>😢 No emoji found.</p>
+            (emojis && emojis.length > 0) ? <div className={styles.fadeIn}><Emoji emojis={emojis} /></div> : search && <p>😢 No emoji found.</p>
           )
         )}
-        <EmojiGrid emojis={recentTranslations} addEmojis={addTranslations} />
+        <EmojiGrid ref={emojiGridRef} />
       </main>
       <Footer />
     </div>

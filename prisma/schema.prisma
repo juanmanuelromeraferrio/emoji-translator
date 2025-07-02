@@ -11,6 +11,8 @@ model Emoji {
   word   String @id
   emoji  String
   source String
+
+  @@index([word])
 }
 
 model RecentTranslation {
@@ -18,4 +20,6 @@ model RecentTranslation {
   word       String?
   emoji      String?
   created_at DateTime @default(now()) @db.Timestamptz(6)
+
+  @@index([created_at])
 }

@@ -4,8 +4,11 @@ import getEmojisFromChatGPT from "../../lib/getEmojisFromChatGPT";
 import saveRecentTranslation from "@/lib/saveRecentTranslation";
 
 
-export default async (req, res) => {
+const handler = async (req, res) => {
   const { word } = req.query;
+  
+  // Set cache headers for better performance
+  res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
     
   let emojis = await getEmojis(word);
 
@@ -29,3 +32,5 @@ export default async (req, res) => {
     res.status(404).json({ error: `No emojis found for word "${word}"` });
   }
 };
+
+export default handler;

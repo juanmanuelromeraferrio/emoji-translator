@@ -2,7 +2,7 @@ const prisma = require('./prisma');
 
 export const getRecentEmojis = async (prismaInstance = prisma) => {
     try {
-        const translations = await prisma.recentTranslation.findMany({
+        const translations = await prismaInstance.recentTranslation.findMany({
             orderBy: {
                 created_at: 'desc'
             },
