@@ -3,7 +3,7 @@ import { FaCopy, FaCheck, FaRedo } from 'react-icons/fa';
 import styles from "../styles/Emoji.module.css";
 import { motion } from 'framer-motion';
 
-const Emoji = ({ emojis }) => {
+const Emoji = React.memo(({ emojis }) => {
     const [copied, setCopied] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -25,7 +25,7 @@ const Emoji = ({ emojis }) => {
 
             return () => clearTimeout(timer);
         }
-    }, [emojis[currentIndex], copied]);
+    }, [copied]);
 
     return (
         <div className={styles.emoji}>
@@ -46,6 +46,8 @@ const Emoji = ({ emojis }) => {
             </button>
         </div>
     );
-};
+});
+
+Emoji.displayName = 'Emoji';
 
 export default Emoji;
