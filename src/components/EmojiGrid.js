@@ -1,29 +1,40 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import styles from '../styles/EmojiGrid.module.css';
 import EmojiCard from './EmojiCard';
+import EmojiGridSkeleton from './EmojiGridSkeleton';
 
 const MAX_EMOJIS_TO_DISPLAY = 40;
 
-function EmojiGrid({ emojis, addEmojis }) {
-  const hasBeenInitialized = useRef(false);
+const EmojiGrid = forwardRef((_props, ref) => {
+  const [emojis, setEmojis] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useImperativeHandle(ref, () => ({
+    addTranslation: (emoji, word) => {
+      setEmojis(prevEmojis => [{ emoji, word }, ...prevEmojis]);
+    }
+  }));
 
   useEffect(() => {
-    async function fetchDefaultEmojis() {
+    async function fetchEmojis() {
       try {
         const response = await fetch('/api/emojis/recents');
         const data = await response.json();
-
-        addEmojis(data.recentEmojis);
-
+        setEmojis(data.recentEmojis || []);
       } catch (error) {
         console.error('Error fetching recent emojis:', error);
+        setEmojis([]);
+      } finally {
+        setLoading(false);
       }
     }
-    if (!hasBeenInitialized.current) {
-      fetchDefaultEmojis();
-      hasBeenInitialized.current = true;
-    }
+    
+    fetchEmojis();
   }, []);
+
+  if (loading) {
+    return <EmojiGridSkeleton />;
+  }
 
   return (
     <div className={styles.emojiGrid}>
@@ -35,6 +46,8 @@ function EmojiGrid({ emojis, addEmojis }) {
       </div>
     </div>
   );
-}
+});
+
+EmojiGrid.displayName = 'EmojiGrid';
 
 export default EmojiGrid;

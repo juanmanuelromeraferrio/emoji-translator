@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/EmojiCard.module.css";
 
-const EmojiCard = ({ emoji, word }) => {
+const EmojiCard = React.memo(({ emoji, word }) => {
 
     const [copied, setCopied] = useState(false);
     const copyToClipboard = () => {
@@ -25,6 +25,8 @@ const EmojiCard = ({ emoji, word }) => {
             <p className={styles.word}>{copied ? 'copied' : word}</p>
         </button>
     );
-}
+});
+
+EmojiCard.displayName = 'EmojiCard';
 
 export default EmojiCard;
