@@ -84,6 +84,8 @@ export default function Home() {
         <meta name="twitter:url" content="https://your-emoji-translator.com/" />
         <meta name="twitter:title" content="Emoji Translator - Find the Perfect Emoji" />
         <meta name="twitter:description" content="Translate words to emojis instantly with our AI-powered emoji translator." />
+
+        <meta name="google-site-verification" content="6w503ma-Gcr3wY8jZukbP8G29o4WbRw9Lbt2BcdzgqQ" />
   
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
